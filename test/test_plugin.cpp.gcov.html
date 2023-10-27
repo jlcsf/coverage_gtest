@@ -31,18 +31,18 @@
             <td class="headerValue">code_coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">129</td>
-            <td class="headerCovTableEntry">138</td>
-            <td class="headerCovTableEntryHi">93.5 %</td>
+            <td class="headerCovTableEntry">178</td>
+            <td class="headerCovTableEntry">189</td>
+            <td class="headerCovTableEntryHi">94.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-10-27 06:31:44</td>
+            <td class="headerValue">2023-10-27 08:48:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">84</td>
-            <td class="headerCovTableEntry">88</td>
-            <td class="headerCovTableEntryHi">95.5 %</td>
+            <td class="headerCovTableEntry">113</td>
+            <td class="headerCovTableEntry">118</td>
+            <td class="headerCovTableEntryHi">95.8 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -305,85 +305,197 @@
 <a name="243"><span class="lineNum">     243 </span><span class="lineCov">          1 :     return 1;</span></a>
 <a name="244"><span class="lineNum">     244 </span>            : }</a>
 <a name="245"><span class="lineNum">     245 </span>            : </a>
-<a name="246"><span class="lineNum">     246 </span>            : struct vaccel_op no_op_operation = {</a>
-<a name="247"><span class="lineNum">     247 </span>            :     .type = VACCEL_NO_OP,</a>
-<a name="248"><span class="lineNum">     248 </span>            :     .func = (void *)no_op,</a>
-<a name="249"><span class="lineNum">     249 </span>            :     .owner = nullptr,</a>
-<a name="250"><span class="lineNum">     250 </span>            : };</a>
-<a name="251"><span class="lineNum">     251 </span>            : </a>
-<a name="252"><span class="lineNum">     252 </span>            : class PluginTestsRegisterOperation : public ::testing::Test {</a>
-<a name="253"><span class="lineNum">     253 </span><span class="lineCov">          1 :     static int fini(void) {</span></a>
-<a name="254"><span class="lineNum">     254 </span><span class="lineCov">          1 :         return VACCEL_OK;</span></a>
-<a name="255"><span class="lineNum">     255 </span>            :     }</a>
-<a name="256"><span class="lineNum">     256 </span>            : </a>
-<a name="257"><span class="lineNum">     257 </span><span class="lineNoCov">          0 :     static int init(void) {</span></a>
-<a name="258"><span class="lineNum">     258 </span><span class="lineNoCov">          0 :         return VACCEL_OK;</span></a>
-<a name="259"><span class="lineNum">     259 </span>            :     }</a>
+<a name="246"><span class="lineNum">     246 </span><span class="lineCov">          1 : static int no_op_exec() {</span></a>
+<a name="247"><span class="lineNum">     247 </span><span class="lineCov">          1 :     return 2;</span></a>
+<a name="248"><span class="lineNum">     248 </span>            : }</a>
+<a name="249"><span class="lineNum">     249 </span>            : </a>
+<a name="250"><span class="lineNum">     250 </span><span class="lineCov">          2 : static int no_op_fpga() {</span></a>
+<a name="251"><span class="lineNum">     251 </span><span class="lineCov">          2 :     return 3;</span></a>
+<a name="252"><span class="lineNum">     252 </span>            : }</a>
+<a name="253"><span class="lineNum">     253 </span>            : </a>
+<a name="254"><span class="lineNum">     254 </span>            : struct vaccel_op no_op_operation = {</a>
+<a name="255"><span class="lineNum">     255 </span>            :     .type = VACCEL_NO_OP,</a>
+<a name="256"><span class="lineNum">     256 </span>            :     .func = (void *)no_op,</a>
+<a name="257"><span class="lineNum">     257 </span>            :     .owner = nullptr,</a>
+<a name="258"><span class="lineNum">     258 </span>            : };</a>
+<a name="259"><span class="lineNum">     259 </span>            : </a>
 <a name="260"><span class="lineNum">     260 </span>            : </a>
-<a name="261"><span class="lineNum">     261 </span>            : protected:</a>
-<a name="262"><span class="lineNum">     262 </span>            :     struct vaccel_plugin no_op_plugin = {0};</a>
-<a name="263"><span class="lineNum">     263 </span>            :     struct vaccel_plugin_info noop_pinfo = {0};</a>
-<a name="264"><span class="lineNum">     264 </span>            : </a>
-<a name="265"><span class="lineNum">     265 </span><span class="lineCov">          1 :     void SetUp() override {</span></a>
-<a name="266"><span class="lineNum">     266 </span><span class="lineCov">          1 :         no_op_plugin.info = &amp;noop_pinfo;</span></a>
-<a name="267"><span class="lineNum">     267 </span><span class="lineCov">          1 :         no_op_plugin.info-&gt;name = pname;</span></a>
-<a name="268"><span class="lineNum">     268 </span><span class="lineCov">          1 :         list_init_entry(&amp;no_op_plugin.entry);</span></a>
-<a name="269"><span class="lineNum">     269 </span><span class="lineCov">          1 :         list_init_entry(&amp;no_op_plugin.ops);</span></a>
-<a name="270"><span class="lineNum">     270 </span><span class="lineCov">          1 :         no_op_plugin.info-&gt;init = init;</span></a>
-<a name="271"><span class="lineNum">     271 </span><span class="lineCov">          1 :         no_op_plugin.info-&gt;fini = fini;</span></a>
-<a name="272"><span class="lineNum">     272 </span>            : </a>
-<a name="273"><span class="lineNum">     273 </span><span class="lineCov">          1 :         plugins_bootstrap();</span></a>
+<a name="261"><span class="lineNum">     261 </span>            : </a>
+<a name="262"><span class="lineNum">     262 </span>            : class PluginTestsRegisterOperation : public ::testing::Test {</a>
+<a name="263"><span class="lineNum">     263 </span><span class="lineCov">          5 :     static int fini(void) {</span></a>
+<a name="264"><span class="lineNum">     264 </span><span class="lineCov">          5 :         return VACCEL_OK;</span></a>
+<a name="265"><span class="lineNum">     265 </span>            :     }</a>
+<a name="266"><span class="lineNum">     266 </span>            : </a>
+<a name="267"><span class="lineNum">     267 </span><span class="lineNoCov">          0 :     static int init(void) {</span></a>
+<a name="268"><span class="lineNum">     268 </span><span class="lineNoCov">          0 :         return VACCEL_OK;</span></a>
+<a name="269"><span class="lineNum">     269 </span>            :     }</a>
+<a name="270"><span class="lineNum">     270 </span>            : </a>
+<a name="271"><span class="lineNum">     271 </span>            : protected:</a>
+<a name="272"><span class="lineNum">     272 </span>            :     struct vaccel_plugin no_op_plugin = {0};</a>
+<a name="273"><span class="lineNum">     273 </span>            :     struct vaccel_plugin_info noop_pinfo = {0};</a>
 <a name="274"><span class="lineNum">     274 </span>            : </a>
-<a name="275"><span class="lineNum">     275 </span><span class="lineCov">          1 :         register_plugin(&amp;no_op_plugin);</span></a>
-<a name="276"><span class="lineNum">     276 </span>            : </a>
-<a name="277"><span class="lineNum">     277 </span><span class="lineCov">          1 :         no_op_operation.owner = &amp;no_op_plugin;</span></a>
-<a name="278"><span class="lineNum">     278 </span><span class="lineCov">          1 :         register_plugin_function(&amp;no_op_operation);</span></a>
-<a name="279"><span class="lineNum">     279 </span><span class="lineCov">          1 :     }</span></a>
-<a name="280"><span class="lineNum">     280 </span>            : </a>
-<a name="281"><span class="lineNum">     281 </span><span class="lineCov">          1 :     void TearDown() override {</span></a>
-<a name="282"><span class="lineNum">     282 </span><span class="lineCov">          1 :         plugins_shutdown();</span></a>
-<a name="283"><span class="lineNum">     283 </span><span class="lineCov">          1 :     }</span></a>
-<a name="284"><span class="lineNum">     284 </span>            : };</a>
-<a name="285"><span class="lineNum">     285 </span>            : </a>
-<a name="286"><span class="lineNum">     286 </span><span class="lineCov">          4 : TEST_F(PluginTestsRegisterOperation, check_plugin_loaded_operation) {</span></a>
-<a name="287"><span class="lineNum">     287 </span><span class="lineCov">          1 :     void* operation = get_plugin_op(VACCEL_NO_OP, 0);</span></a>
-<a name="288"><span class="lineNum">     288 </span><span class="lineCov">          1 :     ASSERT_NE(operation, nullptr);</span></a>
-<a name="289"><span class="lineNum">     289 </span>            : </a>
-<a name="290"><span class="lineNum">     290 </span><span class="lineCov">          1 :     int result = reinterpret_cast&lt;int (*)(void)&gt;(operation)();</span></a>
-<a name="291"><span class="lineNum">     291 </span><span class="lineCov">          1 :     ASSERT_EQ(result, 1);</span></a>
-<a name="292"><span class="lineNum">     292 </span>            : }</a>
-<a name="293"><span class="lineNum">     293 </span>            : </a>
-<a name="294"><span class="lineNum">     294 </span>            : </a>
-<a name="295"><span class="lineNum">     295 </span>            : // TEST(PluginTests, check_plugin_loaded_operation) {</a>
+<a name="275"><span class="lineNum">     275 </span><span class="lineCov">          5 :     void SetUp() override {</span></a>
+<a name="276"><span class="lineNum">     276 </span><span class="lineCov">          5 :         no_op_plugin.info = &amp;noop_pinfo;</span></a>
+<a name="277"><span class="lineNum">     277 </span><span class="lineCov">          5 :         no_op_plugin.info-&gt;name = pname;</span></a>
+<a name="278"><span class="lineNum">     278 </span><span class="lineCov">          5 :         list_init_entry(&amp;no_op_plugin.entry);</span></a>
+<a name="279"><span class="lineNum">     279 </span><span class="lineCov">          5 :         list_init_entry(&amp;no_op_plugin.ops);</span></a>
+<a name="280"><span class="lineNum">     280 </span><span class="lineCov">          5 :         no_op_plugin.info-&gt;init = init;</span></a>
+<a name="281"><span class="lineNum">     281 </span><span class="lineCov">          5 :         no_op_plugin.info-&gt;fini = fini;</span></a>
+<a name="282"><span class="lineNum">     282 </span>            : </a>
+<a name="283"><span class="lineNum">     283 </span><span class="lineCov">          5 :         plugins_bootstrap();</span></a>
+<a name="284"><span class="lineNum">     284 </span>            : </a>
+<a name="285"><span class="lineNum">     285 </span><span class="lineCov">          5 :                 no_op_operation.owner = &amp;no_op_plugin;</span></a>
+<a name="286"><span class="lineNum">     286 </span>            :         </a>
+<a name="287"><span class="lineNum">     287 </span><span class="lineCov">          5 :                 register_plugin(&amp;no_op_plugin);</span></a>
+<a name="288"><span class="lineNum">     288 </span>            :                 </a>
+<a name="289"><span class="lineNum">     289 </span><span class="lineCov">          5 :         register_plugin_function(&amp;no_op_operation);</span></a>
+<a name="290"><span class="lineNum">     290 </span><span class="lineCov">          5 :     }</span></a>
+<a name="291"><span class="lineNum">     291 </span>            : </a>
+<a name="292"><span class="lineNum">     292 </span><span class="lineCov">          5 :     void TearDown() override {</span></a>
+<a name="293"><span class="lineNum">     293 </span><span class="lineCov">          5 :         plugins_shutdown();</span></a>
+<a name="294"><span class="lineNum">     294 </span><span class="lineCov">          5 :     }</span></a>
+<a name="295"><span class="lineNum">     295 </span>            : };</a>
 <a name="296"><span class="lineNum">     296 </span>            : </a>
-<a name="297"><span class="lineNum">     297 </span>            : //      int ret;</a>
-<a name="298"><span class="lineNum">     298 </span>            : //      ret = plugins_bootstrap();</a>
-<a name="299"><span class="lineNum">     299 </span>            : </a>
-<a name="300"><span class="lineNum">     300 </span>            : //      ASSERT_EQ(ret, VACCEL_OK);</a>
+<a name="297"><span class="lineNum">     297 </span>            : class PluginTestsRegisterOperationMultiple : public ::testing::Test {</a>
+<a name="298"><span class="lineNum">     298 </span><span class="lineCov">          2 :     static int fini(void) {</span></a>
+<a name="299"><span class="lineNum">     299 </span><span class="lineCov">          2 :         return VACCEL_OK;</span></a>
+<a name="300"><span class="lineNum">     300 </span>            :     }</a>
 <a name="301"><span class="lineNum">     301 </span>            : </a>
-<a name="302"><span class="lineNum">     302 </span>            : //      void* dl_handle = dlopen(&quot;../plugins/noop/libvaccel-noop.so&quot;, RTLD_LAZY);</a>
-<a name="303"><span class="lineNum">     303 </span>            : //      if (!dl_handle) {</a>
-<a name="304"><span class="lineNum">     304 </span>            : //              FAIL() &lt;&lt; &quot;Error loading plugin library: &quot; &lt;&lt; dlerror();</a>
-<a name="305"><span class="lineNum">     305 </span>            : //      }</a>
-<a name="306"><span class="lineNum">     306 </span>            : </a>
-<a name="307"><span class="lineNum">     307 </span>            : //      void* plugin_symbol = dlsym(dl_handle, &quot;vaccel_plugin&quot;);</a>
-<a name="308"><span class="lineNum">     308 </span>            : //      if (!plugin_symbol) {</a>
-<a name="309"><span class="lineNum">     309 </span>            : //              FAIL() &lt;&lt; &quot;Error loading vaccel_plugin symbol from the library: &quot; &lt;&lt; dlerror();</a>
-<a name="310"><span class="lineNum">     310 </span>            : //      }</a>
-<a name="311"><span class="lineNum">     311 </span>            : //      struct vaccel_plugin* plugin_test;</a>
-<a name="312"><span class="lineNum">     312 </span>            : //      plugin_test = static_cast&lt;struct vaccel_plugin*&gt;(plugin_symbol);</a>
-<a name="313"><span class="lineNum">     313 </span>            : </a>
-<a name="314"><span class="lineNum">     314 </span>            : //      ret = register_plugin(plugin_test);</a>
+<a name="302"><span class="lineNum">     302 </span><span class="lineNoCov">          0 :     static int init(void) {</span></a>
+<a name="303"><span class="lineNum">     303 </span><span class="lineNoCov">          0 :         return VACCEL_OK;</span></a>
+<a name="304"><span class="lineNum">     304 </span>            :     }</a>
+<a name="305"><span class="lineNum">     305 </span>            : </a>
+<a name="306"><span class="lineNum">     306 </span>            : protected:</a>
+<a name="307"><span class="lineNum">     307 </span>            :     struct vaccel_plugin no_op_plugin = {0};</a>
+<a name="308"><span class="lineNum">     308 </span>            :     struct vaccel_plugin_info noop_pinfo = {0};</a>
+<a name="309"><span class="lineNum">     309 </span>            : </a>
+<a name="310"><span class="lineNum">     310 </span>            :         struct vaccel_op exec_operation = {</a>
+<a name="311"><span class="lineNum">     311 </span>            :                 .type = VACCEL_EXEC,</a>
+<a name="312"><span class="lineNum">     312 </span>            :                 .func = (void *)no_op_exec,</a>
+<a name="313"><span class="lineNum">     313 </span>            :                 .owner = &amp;no_op_plugin,</a>
+<a name="314"><span class="lineNum">     314 </span>            :         };</a>
 <a name="315"><span class="lineNum">     315 </span>            : </a>
-<a name="316"><span class="lineNum">     316 </span>            : //      ASSERT_EQ(ret, VACCEL_OK);</a>
-<a name="317"><span class="lineNum">     317 </span>            : </a>
-<a name="318"><span class="lineNum">     318 </span>            : </a>
-<a name="319"><span class="lineNum">     319 </span>            : //      ret = register_plugin(plugin_test_noop);</a>
-<a name="320"><span class="lineNum">     320 </span>            : </a>
-<a name="321"><span class="lineNum">     321 </span>            : //     enum vaccel_op_type op_type = VACCEL_NO_OP;</a>
-<a name="322"><span class="lineNum">     322 </span>            : //     void* operation = get_plugin_op(op_type, 0);</a>
-<a name="323"><span class="lineNum">     323 </span>            : //     ASSERT_NE(operation, nullptr);</a>
-<a name="324"><span class="lineNum">     324 </span>            : // }</a>
+<a name="316"><span class="lineNum">     316 </span>            :         struct vaccel_op copy_operation = {</a>
+<a name="317"><span class="lineNum">     317 </span>            :                 .type = VACCEL_F_ARRAYCOPY,</a>
+<a name="318"><span class="lineNum">     318 </span>            :                 .func = (void *)no_op_fpga,</a>
+<a name="319"><span class="lineNum">     319 </span>            :                 .owner = &amp;no_op_plugin,</a>
+<a name="320"><span class="lineNum">     320 </span>            :         };</a>
+<a name="321"><span class="lineNum">     321 </span>            :         struct vaccel_op array_ops[2] = {exec_operation, copy_operation};</a>
+<a name="322"><span class="lineNum">     322 </span>            : </a>
+<a name="323"><span class="lineNum">     323 </span><span class="lineCov">          2 :     void SetUp() override {</span></a>
+<a name="324"><span class="lineNum">     324 </span>            :                 int ret;</a>
+<a name="325"><span class="lineNum">     325 </span><span class="lineCov">          2 :         no_op_plugin.info = &amp;noop_pinfo;</span></a>
+<a name="326"><span class="lineNum">     326 </span><span class="lineCov">          2 :         no_op_plugin.info-&gt;name = pname;</span></a>
+<a name="327"><span class="lineNum">     327 </span><span class="lineCov">          2 :         list_init_entry(&amp;no_op_plugin.entry);</span></a>
+<a name="328"><span class="lineNum">     328 </span><span class="lineCov">          2 :         list_init_entry(&amp;no_op_plugin.ops);</span></a>
+<a name="329"><span class="lineNum">     329 </span><span class="lineCov">          2 :         no_op_plugin.info-&gt;init = init;</span></a>
+<a name="330"><span class="lineNum">     330 </span><span class="lineCov">          2 :         no_op_plugin.info-&gt;fini = fini;</span></a>
+<a name="331"><span class="lineNum">     331 </span>            : </a>
+<a name="332"><span class="lineNum">     332 </span><span class="lineCov">          2 :         plugins_bootstrap();</span></a>
+<a name="333"><span class="lineNum">     333 </span>            : </a>
+<a name="334"><span class="lineNum">     334 </span><span class="lineCov">          2 :                 ret = register_plugin(&amp;no_op_plugin);</span></a>
+<a name="335"><span class="lineNum">     335 </span><span class="lineCov">          2 :                 ASSERT_EQ(ret, VACCEL_OK);</span></a>
+<a name="336"><span class="lineNum">     336 </span>            : </a>
+<a name="337"><span class="lineNum">     337 </span><span class="lineCov">          2 :                 ret = register_plugin_functions(array_ops, (sizeof(array_ops) / sizeof(array_ops[0])));</span></a>
+<a name="338"><span class="lineNum">     338 </span><span class="lineCov">          2 :                 ASSERT_EQ(ret, VACCEL_OK);      </span></a>
+<a name="339"><span class="lineNum">     339 </span>            : </a>
+<a name="340"><span class="lineNum">     340 </span>            :     }</a>
+<a name="341"><span class="lineNum">     341 </span>            : </a>
+<a name="342"><span class="lineNum">     342 </span><span class="lineCov">          2 :     void TearDown() override {</span></a>
+<a name="343"><span class="lineNum">     343 </span><span class="lineCov">          2 :         plugins_shutdown();</span></a>
+<a name="344"><span class="lineNum">     344 </span><span class="lineCov">          2 :     }</span></a>
+<a name="345"><span class="lineNum">     345 </span>            : };</a>
+<a name="346"><span class="lineNum">     346 </span>            : </a>
+<a name="347"><span class="lineNum">     347 </span><span class="lineCov">          4 : TEST_F(PluginTestsRegisterOperation, fetch_operation) {</span></a>
+<a name="348"><span class="lineNum">     348 </span><span class="lineCov">          1 :     void* operation = get_plugin_op(VACCEL_NO_OP, 0);</span></a>
+<a name="349"><span class="lineNum">     349 </span><span class="lineCov">          1 :     ASSERT_NE(operation, nullptr);</span></a>
+<a name="350"><span class="lineNum">     350 </span>            : </a>
+<a name="351"><span class="lineNum">     351 </span><span class="lineCov">          1 :     int ret = reinterpret_cast&lt;int (*)(void)&gt;(operation)();</span></a>
+<a name="352"><span class="lineNum">     352 </span><span class="lineCov">          1 :     ASSERT_EQ(ret, 1);</span></a>
+<a name="353"><span class="lineNum">     353 </span>            : }</a>
+<a name="354"><span class="lineNum">     354 </span>            : </a>
+<a name="355"><span class="lineNum">     355 </span><span class="lineCov">          4 : TEST_F(PluginTestsRegisterOperation, fetch_operation_unknown_function) {</span></a>
+<a name="356"><span class="lineNum">     356 </span><span class="lineCov">          1 :         enum vaccel_op_type unknown_function = static_cast&lt;enum vaccel_op_type&gt;(VACCEL_FUNCTIONS_NR + 1);</span></a>
+<a name="357"><span class="lineNum">     357 </span><span class="lineCov">          1 :     void* operation = get_plugin_op(unknown_function, 0);</span></a>
+<a name="358"><span class="lineNum">     358 </span><span class="lineCov">          1 :     ASSERT_EQ(operation, nullptr);</span></a>
+<a name="359"><span class="lineNum">     359 </span>            : }</a>
+<a name="360"><span class="lineNum">     360 </span>            : </a>
+<a name="361"><span class="lineNum">     361 </span><span class="lineCov">          4 : TEST_F(PluginTestsRegisterOperation, fetch_operation_not_implemented) {</span></a>
+<a name="362"><span class="lineNum">     362 </span><span class="lineCov">          1 :     void* operation = get_plugin_op(VACCEL_BLAS_SGEMM, 0);</span></a>
+<a name="363"><span class="lineNum">     363 </span><span class="lineCov">          1 :     ASSERT_EQ(operation, nullptr);</span></a>
+<a name="364"><span class="lineNum">     364 </span>            : }</a>
+<a name="365"><span class="lineNum">     365 </span>            : </a>
+<a name="366"><span class="lineNum">     366 </span><span class="lineCov">          4 : TEST_F(PluginTestsRegisterOperationMultiple, fetch_operation_env_prio) {</span></a>
+<a name="367"><span class="lineNum">     367 </span>            :     // we have implemented FPGA in our fixture and lets assume our plugin only implements FPGA functions</a>
+<a name="368"><span class="lineNum">     368 </span><span class="lineCov">          1 :         noop_pinfo.type = VACCEL_PLUGIN_FPGA;</span></a>
+<a name="369"><span class="lineNum">     369 </span>            : </a>
+<a name="370"><span class="lineNum">     370 </span><span class="lineCov">          1 :         void* operation = get_plugin_op(VACCEL_F_ARRAYCOPY, VACCEL_PLUGIN_FPGA);</span></a>
+<a name="371"><span class="lineNum">     371 </span><span class="lineCov">          1 :     ASSERT_NE(operation, nullptr);</span></a>
+<a name="372"><span class="lineNum">     372 </span>            : </a>
+<a name="373"><span class="lineNum">     373 </span><span class="lineCov">          1 :     int ret = reinterpret_cast&lt;int (*)(void)&gt;(operation)();</span></a>
+<a name="374"><span class="lineNum">     374 </span><span class="lineCov">          1 :     ASSERT_EQ(ret, 3);</span></a>
+<a name="375"><span class="lineNum">     375 </span>            : }</a>
+<a name="376"><span class="lineNum">     376 </span>            : </a>
+<a name="377"><span class="lineNum">     377 </span><span class="lineCov">          4 : TEST_F(PluginTestsRegisterOperation, find_noop) {</span></a>
+<a name="378"><span class="lineNum">     378 </span>            : </a>
+<a name="379"><span class="lineNum">     379 </span><span class="lineCov">          1 :         int ret = get_available_plugins(VACCEL_NO_OP);</span></a>
+<a name="380"><span class="lineNum">     380 </span><span class="lineCov">          1 :         ASSERT_EQ(ret,VACCEL_OK);</span></a>
+<a name="381"><span class="lineNum">     381 </span>            : }</a>
+<a name="382"><span class="lineNum">     382 </span>            : </a>
+<a name="383"><span class="lineNum">     383 </span><span class="lineCov">          4 : TEST_F(PluginTestsRegisterOperation, implementation_not_found) {</span></a>
+<a name="384"><span class="lineNum">     384 </span>            : </a>
+<a name="385"><span class="lineNum">     385 </span><span class="lineCov">          1 :         int ret = get_available_plugins(VACCEL_EXEC);</span></a>
+<a name="386"><span class="lineNum">     386 </span><span class="lineCov">          1 :         ASSERT_EQ(ret,VACCEL_OK);</span></a>
+<a name="387"><span class="lineNum">     387 </span>            : }</a>
+<a name="388"><span class="lineNum">     388 </span>            : </a>
+<a name="389"><span class="lineNum">     389 </span><span class="lineCov">          4 : TEST_F(PluginTestsRegisterOperationMultiple, mult_operations){</span></a>
+<a name="390"><span class="lineNum">     390 </span>            : </a>
+<a name="391"><span class="lineNum">     391 </span>            :         void* operation ;</a>
+<a name="392"><span class="lineNum">     392 </span>            :         int ret;</a>
+<a name="393"><span class="lineNum">     393 </span>            : </a>
+<a name="394"><span class="lineNum">     394 </span><span class="lineCov">          1 :         operation = get_plugin_op(VACCEL_EXEC, 0);</span></a>
+<a name="395"><span class="lineNum">     395 </span><span class="lineCov">          1 :     ASSERT_NE(operation, nullptr);</span></a>
+<a name="396"><span class="lineNum">     396 </span><span class="lineCov">          1 :     ret = reinterpret_cast&lt;int (*)(void)&gt;(operation)();</span></a>
+<a name="397"><span class="lineNum">     397 </span><span class="lineCov">          1 :     ASSERT_EQ(ret, 2);</span></a>
+<a name="398"><span class="lineNum">     398 </span>            : </a>
+<a name="399"><span class="lineNum">     399 </span><span class="lineCov">          1 :         operation = get_plugin_op(VACCEL_F_ARRAYCOPY, 0);</span></a>
+<a name="400"><span class="lineNum">     400 </span><span class="lineCov">          1 :     ASSERT_NE(operation, nullptr);</span></a>
+<a name="401"><span class="lineNum">     401 </span><span class="lineCov">          1 :     ret = reinterpret_cast&lt;int (*)(void)&gt;(operation)();</span></a>
+<a name="402"><span class="lineNum">     402 </span><span class="lineCov">          1 :     ASSERT_EQ(ret, 3);</span></a>
+<a name="403"><span class="lineNum">     403 </span>            :         </a>
+<a name="404"><span class="lineNum">     404 </span>            : </a>
+<a name="405"><span class="lineNum">     405 </span>            : }</a>
+<a name="406"><span class="lineNum">     406 </span>            : </a>
+<a name="407"><span class="lineNum">     407 </span>            : // TEST(PluginTests, check_plugin_loaded_operation) {</a>
+<a name="408"><span class="lineNum">     408 </span>            : </a>
+<a name="409"><span class="lineNum">     409 </span>            : //      int ret;</a>
+<a name="410"><span class="lineNum">     410 </span>            : //      ret = plugins_bootstrap();</a>
+<a name="411"><span class="lineNum">     411 </span>            : </a>
+<a name="412"><span class="lineNum">     412 </span>            : //      ASSERT_EQ(ret, VACCEL_OK);</a>
+<a name="413"><span class="lineNum">     413 </span>            : </a>
+<a name="414"><span class="lineNum">     414 </span>            : //      void* dl_handle = dlopen(&quot;../plugins/noop/libvaccel-noop.so&quot;, RTLD_LAZY);</a>
+<a name="415"><span class="lineNum">     415 </span>            : //      if (!dl_handle) {</a>
+<a name="416"><span class="lineNum">     416 </span>            : //              FAIL() &lt;&lt; &quot;Error loading plugin library: &quot; &lt;&lt; dlerror();</a>
+<a name="417"><span class="lineNum">     417 </span>            : //      }</a>
+<a name="418"><span class="lineNum">     418 </span>            : </a>
+<a name="419"><span class="lineNum">     419 </span>            : //      void* plugin_symbol = dlsym(dl_handle, &quot;vaccel_plugin&quot;);</a>
+<a name="420"><span class="lineNum">     420 </span>            : //      if (!plugin_symbol) {</a>
+<a name="421"><span class="lineNum">     421 </span>            : //              FAIL() &lt;&lt; &quot;Error loading vaccel_plugin symbol from the library: &quot; &lt;&lt; dlerror();</a>
+<a name="422"><span class="lineNum">     422 </span>            : //      }</a>
+<a name="423"><span class="lineNum">     423 </span>            : //      struct vaccel_plugin* plugin_test;</a>
+<a name="424"><span class="lineNum">     424 </span>            : //      plugin_test = static_cast&lt;struct vaccel_plugin*&gt;(plugin_symbol);</a>
+<a name="425"><span class="lineNum">     425 </span>            : </a>
+<a name="426"><span class="lineNum">     426 </span>            : //      ret = register_plugin(plugin_test);</a>
+<a name="427"><span class="lineNum">     427 </span>            : </a>
+<a name="428"><span class="lineNum">     428 </span>            : //      ASSERT_EQ(ret, VACCEL_OK);</a>
+<a name="429"><span class="lineNum">     429 </span>            : </a>
+<a name="430"><span class="lineNum">     430 </span>            : </a>
+<a name="431"><span class="lineNum">     431 </span>            : //      ret = register_plugin(plugin_test_noop);</a>
+<a name="432"><span class="lineNum">     432 </span>            : </a>
+<a name="433"><span class="lineNum">     433 </span>            : //     enum vaccel_op_type op_type = VACCEL_NO_OP;</a>
+<a name="434"><span class="lineNum">     434 </span>            : //     void* operation = get_plugin_op(op_type, 0);</a>
+<a name="435"><span class="lineNum">     435 </span>            : //     ASSERT_NE(operation, nullptr);</a>
+<a name="436"><span class="lineNum">     436 </span>            : // }</a>
 </pre>
       </td>
     </tr>
